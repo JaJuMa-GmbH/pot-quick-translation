@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<powertoys xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Jajuma_PowerToys:etc/jajuma_powertoys.xsd">
+    <quickaction id="pot_quick_translation" class="Jajuma\PotQuickTranslation\Block\QuickAction">
+        <label translate="true">Translation</label>
+        <arguments>
+            <argument name="enable">true</argument>
+            <argument name="action_type">button</argument>
+            <argument name="template">Jajuma_PotQuickTranslation::quick_action.phtml</argument>
+            <argument name="widget_icon">Jajuma_PowerToys::svg/heroicons/outline/translate.svg</argument>
+            <argument name="magewire">Jajuma\PotQuickTranslation\Magewire\QuickAction</argument>
+            <argument name="preload">true</argument>
+            <argument name="sort_order">10</argument>
+        </arguments>
+    </quickaction>
+</powertoys>

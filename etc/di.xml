@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Translation\Model\Inline\CacheManager">
+		<plugin name="Jajuma_PotQuickTranslation::magento_translation_controller_ajax_index" sortOrder="10"
+                type="Jajuma\PotQuickTranslation\Plugin\Magento\Translation\Model\Inline\CacheManagerPlugin"/>
+	</type>
+</config>

@@ -1,0 +1,86 @@
+<?php
+use Magento\Framework\Escaper;
+use Jajuma\PotQuickTranslation\Block\QuickAction;
+
+/** @var $block QuickAction */
+/** @var $escaper Escaper */
+
+$magewire = $block->getMagewire();
+$status = $magewire->getCurrentStatus();
+?>
+
+<div id="pot-quick-translation" wire:loading.class="loading">
+    <img src="<?= $block->getIcon(); ?>"/>
+    <div class="pot-quick-translation-status <?= $status ? 'is-translate-enable' : '' ?>"></div>
+    <a wire:click="execute"><?= $block->getData('name') ?></a>
+    <script>
+        let potTranslateStatusElm = document.querySelector("#pot-quick-translation .pot-quick-translation-status");
+        window.addEventListener('finish-quick-translation', event => {
+            let message = event.detail.message;
+            if (message !== undefined) {
+                let elm = document.querySelector('.powertoys-actions');
+                let messageElm = document.createElement('p');
+                messageElm.classList.add('message', 'errors');
+                messageElm.innerText = message;
+                elm.appendChild(messageElm);
+                return;
+            }
+
+            let params = new URLSearchParams(window.location.search);
+            let status = event.detail.status;
+            if (status === '1') {
+                params.set('is-translate', '1');
+            } else {
+                params.delete('is-translate');
+            }
+
+            window.location.search = params.toString();
+        });
+    </script>
+
+    <style>
+        .powertoys-action-item #pot-quick-translation {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        #pot-quick-translation a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .pot-quick-translation-status {
+            position: relative;
+            height: 20px;
+        }
+
+        .pot-quick-translation-status svg {
+            object-fit: contain;
+            width: 20px;
+            height: 20px;
+        }
+
+        .pot-quick-translation-status:after {
+            content: "";
+            width: 8px;
+            height: 8px;
+            position: absolute;
+            top: -3px;
+            right: -2px;
+            background: #dfdfdf;
+            border: 0.5px solid #6b6c74;
+            border-radius: 50%;
+        }
+
+        .pot-quick-translation-status.is-translate-enable:after {
+            background: #68ef24;
+            border: 0.5px solid #6e6e6e;
+        }
+
+        .powertoys-actions .message.errors {
+            color: #fff;
+            background: #ef4444;
+        }
+    </style>
+</div>
