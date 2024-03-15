@@ -14,7 +14,6 @@ $status = $magewire->getCurrentStatus();
     <div class="pot-quick-translation-status <?= $status ? 'is-translate-enable' : '' ?>"></div>
     <a wire:click="execute"><?= $block->getData('name') ?></a>
     <script>
-        let potTranslateStatusElm = document.querySelector("#pot-quick-translation .pot-quick-translation-status");
         window.addEventListener('finish-quick-translation', event => {
             let message = event.detail.message;
             if (message !== undefined) {
