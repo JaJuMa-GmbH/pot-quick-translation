@@ -56,9 +56,8 @@ class Data extends AbstractHelper
     {
         $translateInlineActive = $this->scopeConfig->getValue(self::XML_PATH_DEV_TRANSLATE_INLINE_ACTIVE);
         if ($isHyvaTranslation) {
-            $hyvaTranslationEnabled = $this->scopeConfig->getValue(self::XML_PATH_JAJUMA_TRANSLATE_IS_ENABLED);
             $hyvaTranslationInlineActive = $this->scopeConfig->getValue(self::XML_PATH_JAJUMA_TRANSLATE_INLINE_ACTIVE);
-            return $translateInlineActive && $hyvaTranslationEnabled && $hyvaTranslationInlineActive;
+            return $translateInlineActive && $hyvaTranslationInlineActive;
         }
         return $translateInlineActive;
     }
@@ -83,7 +82,6 @@ class Data extends AbstractHelper
     public function setTranslateInlineConfig($value, bool $isHyvaTranslation = false)
     {
         if ($isHyvaTranslation) {
-            $this->writer->save(self::XML_PATH_JAJUMA_TRANSLATE_IS_ENABLED, $value);
             $this->writer->save(self::XML_PATH_JAJUMA_TRANSLATE_INLINE_ACTIVE, $value);
         }
         $this->writer->save(self::XML_PATH_DEV_TRANSLATE_INLINE_ACTIVE, $value);
