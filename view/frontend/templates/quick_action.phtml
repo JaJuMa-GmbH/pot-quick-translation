@@ -7,13 +7,15 @@ use Jajuma\PotQuickTranslation\Block\QuickAction;
 
 $magewire = $block->getMagewire();
 $status = $magewire->getCurrentStatus();
+$powerToysHelper = $this->helper(\Jajuma\PowerToys\Helper\Data::class);
+$nonce = $powerToysHelper->getNonce();
 ?>
 
 <div id="pot-quick-translation" wire:loading.class="loading">
     <img src="<?= $block->getIcon(); ?>"/>
     <div class="pot-quick-translation-status <?= $status ? 'is-translate-enable' : '' ?>"></div>
     <a wire:click="execute"><?= $block->getData('name') ?></a>
-    <script>
+    <script <?= $nonce ? 'nonce="' . $nonce . '"' : '' ?>>
         window.addEventListener('finish-quick-translation', event => {
             let message = event.detail.message;
             if (message !== undefined) {
